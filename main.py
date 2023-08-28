@@ -30,61 +30,64 @@ AutoCaptionBot = pyrogram.Client(
     bot_token=bot_token
 )
 
-custom_captions = {}
-
 start_message = """
-<b>❤️ Kaha the aap 🥲 {}</b> 
+<b>👋Hello {}</b> 
 
-<i>Mai kya kya kar sakta hu 👇🏻</i>
-Mujhe apne Channel me add karo 🤩
-Kuch Bhi forward karo, <b>I WILL REMOVE<b/> 👇🏻🙅
-<code>Mentions
-Usernames
-@
-link
-t.me</code>
+I am an AutoCaption bot
 
-I have superpowers 🏋️
-Brained by @ideafy"""
+All you have to do is add me to your channel and I will show you my power
+
+@Mo_Tech_YT"""
 
 about_message = """  
-<b>• Name : [GodMode Yedekho V1]</b>
+<b>• Name : [AutoCaption V1](t.me/{username})</b>
 
-<b>• Developer : [@Ideafy]
+<b>• Developer : [Muhammed](https://github.com/PR0FESS0R-99) 
 
-<b>• Updates : <a href=https://t.me/yedekho>⚡⚡MAGIC⚡⚡</a></b>"""
+<b>• Language : Python3</b>
 
-@AutoCaptionBot.on_message(pyrogram.filters.private & pyrogram.filters.command("start"))
-def start_command(bot, message):
-   message.reply("Hi I'm Auto Caption Bot!")
-   
-@AutoCaptionBot.on_message(pyrogram.filters.private & pyrogram.filters.command("caption"))
-def set_caption(bot, message):
+<b>• Library : Pyrogram v{version}</b>  
+
+<b>• Updates : <a href=https://t.me/Mo_Tech_YT>Click Here</a></b>
+
+<b>• Source Code : <a href=https://github.com/PR0FESS0R-99/AutoCaption-Bot>Click Here</a></b>"""
+
+
+@AutoCaptionBot.on_message(pyrogram.filters.private & pyrogram.filters.command(["start"]))
+def start_command(bot, update):
+  update.reply(start_message.format(update.from_user.mention), reply_markup=start_buttons(bot, update), parse_mode=pyrogram.enums.ParseMode.HTML, disable_web_page_preview=True)
+
+@AutoCaptionBot.on_callback_query(pyrogram.filters.regex("start"))
+def start_callback(bot, update):
+  update.message.edit(start_message.format(update.from_user.mention), reply_markup=start_buttons(bot, update.message), parse_mode=pyrogram.enums.ParseMode.HTML, disable_web_page_preview=True)
   
-  user_id = message.from_user.id
-  custom_caption = message.text.split(maxsplit=1)[1]
-  
-  custom_captions[user_id] = custom_caption
-  
-  message.reply("Your custom caption has been saved!")
-  
-# Core caption edit logic
+@AutoCaptionBot.on_callback_query(pyrogram.filters.regex("about"))
+def about_callback(bot, update):
+  bot = bot.get_me()
+  update.message.edit(about_message.format(version=pyrogram.__version__, username=bot.username), reply_markup=about_buttons(bot, update.message), parse_mode=pyrogram.enums.ParseMode.HTML, disable_web_page_preview=True)
+
 
 @AutoCaptionBot.on_message(pyrogram.filters.channel)
-def edit_caption(bot, message):
+def edit_caption(bot, update: pyrogram.types.Message):
 
-  try:
-    caption = message.caption
-    caption = re.sub(r"@\w+\b|http\S+\b", "", caption, flags=re.IGNORECASE) 
+  caption = update.caption
+  if caption:
+    caption = re.sub(r"@\w+", "", caption) 
+    caption = re.sub(r"join|join now", "", caption, flags=re.IGNORECASE)
+
+  if os.environ.get("custom_caption"):
+    motech, _ = get_file_details(update)
+
+    try:
+      update.edit_caption(caption + "\n" + custom_caption.format(file_name=motech.file_name))
+
+    except pyrogram.errors.FloodWait as e:
+      asyncio.sleep(e.x)  
+      update.edit_caption(caption + "\n" + custom_caption.format(file_name=motech.file_name, mote=motech.mot))
+
+  else:
+    return
     
-    if message.from_user.id in custom_captions:
-      custom = custom_captions[message.from_user.id]
-      caption += "\n\n" + custom
-      
-    message.edit_caption(caption)
-    
-  except Exception as e:
-    print(e)
 
 def get_file_details(update: pyrogram.types.Message):
   if update.media:
@@ -106,11 +109,11 @@ def start_buttons(bot, update):
   bot = bot.get_me()
   buttons = [
     [
-      pyrogram.types.InlineKeyboardButton("Updats", url="https://t.me/yedekho_in"),
-      pyrogram.types.InlineKeyboardButton("Inside Info ℹ️", callback_data="about") 
+      pyrogram.types.InlineKeyboardButton("Updates", url="https://t.me/Mo_Tech_YT"),
+      pyrogram.types.InlineKeyboardButton("About 🤠", callback_data="about") 
     ],
     [
-      pyrogram.types.InlineKeyboardButton("Experience The magic ✨", url=f"http://t.me/{bot.username}?startchannel=true")
+      pyrogram.types.InlineKeyboardButton("➕️ Add To Your Channel ➕️", url=f"http://t.me/{bot.username}?startchannel=true")
     ]
   ]
   return pyrogram.types.InlineKeyboardMarkup(buttons)
@@ -118,7 +121,7 @@ def start_buttons(bot, update):
 def about_buttons(bot, update):
   buttons = [
     [
-      pyrogram.types.InlineKeyboardButton("⏩ Home", callback_data="start")
+      pyrogram.types.InlineKeyboardButton("🏠 Back To Home 🏠", callback_data="start")
     ]
   ]
   return pyrogram.types.InlineKeyboardMarkup(buttons)
