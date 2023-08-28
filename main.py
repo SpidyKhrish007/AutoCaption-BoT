@@ -106,6 +106,7 @@ def get_file_details(update: pyrogram.types.Message):
         return obj, obj.file_id
 
 def start_buttons(bot, update):
+  bot = bot.get_me()
   buttons = [
     [
       pyrogram.types.InlineKeyboardButton("Updates", url="https://t.me/Mo_Tech_YT"),
