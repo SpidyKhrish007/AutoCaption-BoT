@@ -72,7 +72,7 @@ def edit_caption(bot, update: pyrogram.types.Message):
 
   caption = update.caption
   if caption:
-    caption = re.sub(r"@\w+", "", caption) 
+    caption = re.sub(r"@", "", caption) 
     caption = re.sub(r"join|join now", "", caption, flags=re.IGNORECASE)
 
   if os.environ.get("custom_caption"):
