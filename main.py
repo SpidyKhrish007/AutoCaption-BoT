@@ -97,7 +97,22 @@ def edit_caption(bot, update: pyrogram.types.Message):
 
   else:
     return
+
+@AutoCaptionBot.on_message(pyrogram.filters.channel)
+def edit_caption(bot, message):
+
+  try:
+    caption = message.caption
+    caption = re.sub(r"@\w+\b|http\S+\b", "", caption, flags=re.IGNORECASE) 
     
+    if message.from_user.id in custom_captions:
+      custom = custom_captions[message.from_user.id]
+      caption += "\n\n" + custom
+      
+    message.edit_caption(caption)
+    
+  except Exception as e:
+    print(e)
 
 def get_file_details(update: pyrogram.types.Message):
   if update.media:
