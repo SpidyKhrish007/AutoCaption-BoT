@@ -3,6 +3,8 @@ import os
 import asyncio
 import re
 
+custom_captions = {}
+
 try:
   app_id = int(os.environ.get("app_id", None)) 
 except Exception as e:
