@@ -52,11 +52,10 @@ about_message = """
 
 <b>• Updates : <a href=https://t.me/yedekho>⚡⚡MAGIC⚡⚡</a></b>"""
 
-
-@AutoCaptionBot.on_message(pyrogram.filters.private & pyrogram.filters.command(["start"]))
-def start_command(bot, update):
-  update.reply(start_message.format(update.from_user.mention), reply_markup=start_buttons(bot, update), parse_mode=pyrogram.enums.ParseMode.HTML, disable_web_page_preview=True)
-
+@AutoCaptionBot.on_message(pyrogram.filters.private & pyrogram.filters.command("start"))
+def start_command(bot, message):
+   message.reply("Hi I'm Auto Caption Bot!")
+   
 @AutoCaptionBot.on_message(pyrogram.filters.private & pyrogram.filters.command("caption"))
 def set_caption(bot, message):
   
@@ -66,37 +65,8 @@ def set_caption(bot, message):
   custom_captions[user_id] = custom_caption
   
   message.reply("Your custom caption has been saved!")
-
-@AutoCaptionBot.on_callback_query(pyrogram.filters.regex("start"))
-def start_callback(bot, update):
-  update.message.edit(start_message.format(update.from_user.mention), reply_markup=start_buttons(bot, update.message), parse_mode=pyrogram.enums.ParseMode.HTML, disable_web_page_preview=True)
   
-@AutoCaptionBot.on_callback_query(pyrogram.filters.regex("about"))
-def about_callback(bot, update):
-  bot = bot.get_me()
-  update.message.edit(about_message.format(version=pyrogram.__version__, username=bot.username), reply_markup=about_buttons(bot, update.message), parse_mode=pyrogram.enums.ParseMode.HTML, disable_web_page_preview=True)
-
-
-@AutoCaptionBot.on_message(pyrogram.filters.channel)
-def edit_caption(bot, update: pyrogram.types.Message):
-
-  caption = update.caption
-  if caption:
-    caption = re.sub(r"@\w+\b|http\S+\b|www.\S+\b|t.me/\S+\b", "", caption, flags=re.IGNORECASE) 
-    caption = re.sub(r"join", "", caption, flags=re.IGNORECASE)
-
-  if os.environ.get("custom_caption"):
-    motech, _ = get_file_details(update)
-
-    try:
-      update.edit_caption(caption + "\n" + custom_caption.format(file_name=motech.file_name))
-
-    except pyrogram.errors.FloodWait as e:
-      asyncio.sleep(e.x)  
-      update.edit_caption(caption + "\n" + custom_caption.format(file_name=motech.file_name, mote=motech.mot))
-
-  else:
-    return
+# Core caption edit logic
 
 @AutoCaptionBot.on_message(pyrogram.filters.channel)
 def edit_caption(bot, message):
@@ -113,8 +83,6 @@ def edit_caption(bot, message):
     
   except Exception as e:
     print(e)
-
-custom_captions = {}
 
 def get_file_details(update: pyrogram.types.Message):
   if update.media:
