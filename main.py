@@ -31,26 +31,35 @@ AutoCaptionBot = pyrogram.Client(
 )
 
 start_message = """
-<b>👋Hello {}</b> 
+<b>❤️ Kaha the aap 🥲 {}</b> 
 
-I am an AutoCaption bot
+<i>Mai kya kya kar sakta hu 👇🏻</i>
+Mujhe apne Channel\n ya Group me add karo 🤩
 
-All you have to do is add me to your channel and I will show you my power
+Phir kahi, Kuch Bhi forward karo ⏩
+Sab kuch Hata dunga aap chaho toh aapka bhi laga dunga
 
-@Mo_Tech_YT"""
+Mentions
+Usernames
+@
+link
+t.me
+sab kuch ⚡
+
+Mere se jayda powerful\n Caption wala bot nahi dekha hoga 100% 
+
+Brained by @ideafy"""
 
 about_message = """  
-<b>• Name : [AutoCaption V1](t.me/{username})</b>
+<b>• Name : [GodMode Yedekho V1](t.me/{username})</b>
 
-<b>• Developer : [Muhammed](https://github.com/PR0FESS0R-99) 
+<b>• Developer : [Ideafy](https://t.me/ideafy) 
 
-<b>• Language : Python3</b>
+<b>• Language : apna kam karo
 
-<b>• Library : Pyrogram v{version}</b>  
+<b>• Library : apna kam karo</b>  
 
-<b>• Updates : <a href=https://t.me/Mo_Tech_YT>Click Here</a></b>
-
-<b>• Source Code : <a href=https://github.com/PR0FESS0R-99/AutoCaption-Bot>Click Here</a></b>"""
+<b>• Updates : <a href=https://t.me/yedekho>⚡⚡MAGIC⚡⚡</a></b>"""
 
 
 @AutoCaptionBot.on_message(pyrogram.filters.private & pyrogram.filters.command(["start"]))
@@ -109,11 +118,11 @@ def start_buttons(bot, update):
   bot = bot.get_me()
   buttons = [
     [
-      pyrogram.types.InlineKeyboardButton("Updates", url="https://t.me/Mo_Tech_YT"),
-      pyrogram.types.InlineKeyboardButton("About 🤠", callback_data="about") 
+      pyrogram.types.InlineKeyboardButton("Updats", url="https://t.me/yedekho_in"),
+      pyrogram.types.InlineKeyboardButton("Inside Info ℹ️", callback_data="about") 
     ],
     [
-      pyrogram.types.InlineKeyboardButton("➕️ Add To Your Channel ➕️", url=f"http://t.me/{bot.username}?startchannel=true")
+      pyrogram.types.InlineKeyboardButton("Experience The magic ✨", url=f"http://t.me/{bot.username}?startchannel=true")
     ]
   ]
   return pyrogram.types.InlineKeyboardMarkup(buttons)
@@ -121,7 +130,7 @@ def start_buttons(bot, update):
 def about_buttons(bot, update):
   buttons = [
     [
-      pyrogram.types.InlineKeyboardButton("🏠 Back To Home 🏠", callback_data="start")
+      pyrogram.types.InlineKeyboardButton("⏩ Home", callback_data="start")
     ]
   ]
   return pyrogram.types.InlineKeyboardMarkup(buttons)
