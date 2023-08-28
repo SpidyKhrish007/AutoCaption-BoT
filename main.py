@@ -3,8 +3,6 @@ import os
 import asyncio
 import re
 
-custom_captions = {}
-
 try:
   app_id = int(os.environ.get("app_id", None)) 
 except Exception as e:
@@ -31,6 +29,8 @@ AutoCaptionBot = pyrogram.Client(
     api_hash=api_hash,
     bot_token=bot_token
 )
+
+custom_captions = {}
 
 start_message = """
 <b>❤️ Kaha the aap 🥲 {}</b> 
