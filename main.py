@@ -57,6 +57,16 @@ about_message = """
 def start_command(bot, update):
   update.reply(start_message.format(update.from_user.mention), reply_markup=start_buttons(bot, update), parse_mode=pyrogram.enums.ParseMode.HTML, disable_web_page_preview=True)
 
+@AutoCaptionBot.on_message(pyrogram.filters.private & pyrogram.filters.command("caption"))
+def set_caption(bot, message):
+  
+  user_id = message.from_user.id
+  custom_caption = message.text.split(maxsplit=1)[1]
+  
+  custom_captions[user_id] = custom_caption
+  
+  message.reply("Your custom caption has been saved!")
+
 @AutoCaptionBot.on_callback_query(pyrogram.filters.regex("start"))
 def start_callback(bot, update):
   update.message.edit(start_message.format(update.from_user.mention), reply_markup=start_buttons(bot, update.message), parse_mode=pyrogram.enums.ParseMode.HTML, disable_web_page_preview=True)
