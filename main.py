@@ -73,7 +73,7 @@ def edit_caption(bot, update: pyrogram.types.Message):
   caption = update.caption
   if caption:
     caption = re.sub(r"(@\w+)|(http\S+)|(www.\S+)|(t.me/\S+)(\w+)", r"\5", caption, flags=re.IGNORECASE) 
-    caption = re.sub(r"join|join now", "", caption, flags=re.IGNORECASE)
+    caption = re.sub(r"join|Find|any|movie|Backup|share|bot|group|Channel|join now", "", caption, flags=re.IGNORECASE)
 
   if os.environ.get("custom_caption"):
     motech, _ = get_file_details(update)
