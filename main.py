@@ -34,30 +34,21 @@ start_message = """
 <b>❤️ Kaha the aap 🥲 {}</b> 
 
 <i>Mai kya kya kar sakta hu 👇🏻</i>
-Mujhe apne Channel\n ya Group me add karo 🤩
-
-Phir kahi, Kuch Bhi forward karo ⏩
-Sab kuch Hata dunga aap chaho toh aapka bhi laga dunga
-
-Mentions
+Mujhe apne Channel me add karo 🤩
+Kuch Bhi forward karo, <b>I WILL REMOVE<b/> 👇🏻🙅
+<code>Mentions
 Usernames
 @
 link
-t.me
-sab kuch ⚡
+t.me</code>
 
-Mere se jayda powerful\n Caption wala bot nahi dekha hoga 100% 
-
+I have superpowers 🏋️
 Brained by @ideafy"""
 
 about_message = """  
-<b>• Name : [GodMode Yedekho V1](t.me/{username})</b>
+<b>• Name : [GodMode Yedekho V1]</b>
 
-<b>• Developer : [Ideafy](https://t.me/ideafy) 
-
-<b>• Language : apna kam karo
-
-<b>• Library : apna kam karo</b>  
+<b>• Developer : [@Ideafy]
 
 <b>• Updates : <a href=https://t.me/yedekho>⚡⚡MAGIC⚡⚡</a></b>"""
 
