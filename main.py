@@ -30,6 +30,8 @@ AutoCaptionBot = pyrogram.Client(
     bot_token=bot_token
 )
 
+custom_caption = ""
+
 start_message = """
 <b>👋Hello {}</b> 
 
