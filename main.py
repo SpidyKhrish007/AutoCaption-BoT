@@ -114,6 +114,8 @@ def edit_caption(bot, message):
   except Exception as e:
     print(e)
 
+custom_captions = {}
+
 def get_file_details(update: pyrogram.types.Message):
   if update.media:
     for message_type in (
