@@ -4,17 +4,17 @@ import asyncio
 import re
 
 try:
-  app_id = int(os.environ.get("app_id", None)) 
+  app_id = int(os.environ.get("app_id", "23830477")) 
 except Exception as e:
   print(f"⚠️ App ID Invalid {e}")
 
 try:
-  api_hash = os.environ.get("api_hash", None)  
+  api_hash = os.environ.get("api_hash", "19f8365d98fb11c9cd6c1eaa8b1fa4b8")  
 except Exception as e:
   print(f"⚠️ Api Hash Invalid {e}")
 
 try:
-  bot_token = os.environ.get("bot_token", None)
+  bot_token = os.environ.get("bot_token", "6602672751:AAEQje2kkViyQixycc2snZn9bKEo3o7COp8")
 except Exception as e:
   print(f"⚠️ Bot Token Invalid {e}")
   
@@ -37,9 +37,7 @@ start_message = """
 
 I am an AutoCaption bot
 
-All you have to do is add me to your channel and I will show you my power
-
-@Mo_Tech_YT"""
+All you have to do is add me to your channel and I will show you my power"""
 
 about_message = """  
 <b>• Name : [AutoCaption V1](t.me/{username})</b>
